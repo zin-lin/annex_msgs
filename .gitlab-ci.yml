@@ -1,0 +1,42 @@
+stages:
+    - build_stage
+    #- test_stage
+    - containerise_stage
+#    - trigger_stage
+
+.build_template: &build_template
+  stage: build_stage
+  image: ros:humble-ros-core
+  before_script:
+    - apt update >/dev/null
+    - apt install python3-colcon-common-extensions git build-essential -y
+    - source /opt/ros/humble/setup.sh
+    - mkdir -p annex_ws/src/annex_msgs
+    - shopt -s extglob
+    - mv !(annex_ws) annex_ws/src/annex_msgs
+    - cd annex_ws/src
+    - git clone https://gitlab.com/eufs/eufs_msgs.git
+    - cd ../
+  script:
+    - colcon build --cmake-args -DBUILD_TESTING=1
+  artifacts:
+    paths:
+      - fstn_ws/
+    expire_in: 1 week
+
+build:
+  <<: *build_template
+
+build-merge:
+  <<: *build_template
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+#testing:
+#
+#trigger-annex:
+#  stage: trigger_stage
+#  trigger:
+#    project: formula-team-napier/internal-unrestricted/annex
+#  rules:
+#    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
