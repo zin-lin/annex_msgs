@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>fstn_messages_package</name>
+  <name>annex_msgs</name>
   <version>0.0.0</version>
   <description>This package contains ROS2 messages used for the N.A.V system.</description>
-  <maintainer email="FormulaStudent@napier.ac.uk">FormulaStudentTeamNapier</maintainer>
+  <maintainer email="zinlinhtun34@gmail.com">Zin Lin Htun</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

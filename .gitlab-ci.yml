@@ -21,7 +21,7 @@ stages:
     - colcon build --cmake-args -DBUILD_TESTING=1
   artifacts:
     paths:
-      - fstn_ws/
+      - annex_ws/
     expire_in: 1 week
 
 build:
