@@ -28,11 +28,21 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# Get the absolute path of the current source directory
+get_filename_component(PACKAGE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" ABSOLUTE)
+
+# Glob for the message files
+file(GLOB MSG_FILES_PATH "${PACKAGE_DIR}/msg/*.msg")
+
+# Create a formatted list of message files with relative paths and quotes
+set(FORMATTED_MSG_FILES)
+foreach(MSG_FILE ${MSG_FILES_PATH})
+    file(RELATIVE_PATH REL_PATH "${PACKAGE_DIR}" "${MSG_FILE}")
+    list(APPEND FORMATTED_MSG_FILES "${REL_PATH}")
+endforeach()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-        "msg/Ai2vcu.msg"
-        "msg/Vcu2ai.msg"
-        "msg/Vcu2con.msg"
+        ${FORMATTED_MSG_FILES}
         DEPENDENCIES std_msgs geometry_msgs)
 
 ament_package()
