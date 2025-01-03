@@ -45,4 +45,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
         ${FORMATTED_MSG_FILES}
         DEPENDENCIES std_msgs geometry_msgs)
 
+message(STATUS "Message files: ${FORMATTED_MSG_FILES}")
+
 ament_package()
