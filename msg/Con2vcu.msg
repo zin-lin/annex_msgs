@@ -7,3 +7,4 @@ uint8       status
 uint8       annex
 float32     mode
 float32     dir
+float32     deg
