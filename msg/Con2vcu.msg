@@ -9,3 +9,4 @@ float32     mode
 float32     dir
 float32     deg
 float32     d_look
+float32     throttle_rpm
